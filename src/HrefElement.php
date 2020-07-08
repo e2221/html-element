@@ -28,10 +28,15 @@ class HrefElement extends BaseElement
         return parent::render();
     }
 
-    /** Get static class */
-    public static function getStatic()
+    /** Get static class
+     * @param string|null $elName
+     * @param array $attributes
+     * @param string|null $textContent
+     * @return BaseElement
+     */
+    public static function getStatic(?string $elName=null, array $attributes=[], ?string $textContent=null)
     {
-        return new static();
+        return new self($elName, $attributes, $textContent);
     }
 
     /**

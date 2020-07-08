@@ -6,6 +6,16 @@ foreach (glob(__DIR__ . "/../src/*.php") as $filename)
     include $filename;
 }
 
+\e2221\HtmElement\BaseElement::getStatic('div', ['class'=>'bg-primary'])
+    ->addElement(\e2221\HtmElement\BaseElement::getStatic('p')
+        ->addElement(\e2221\HtmElement\HrefElement::getStatic()
+            ->setTextContent('link')
+            ->setHref('https://google.com')
+            ->setConfirmation('aaa')))
+    ->renderPrint();
+
+echo '<br>';
+
 
 $test = new \e2221\HtmElement\BaseElement('a');
 echo $test->setElName('a')

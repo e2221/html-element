@@ -71,6 +71,34 @@ class BaseElement
         echo $this->render();
     }
 
+    /** Get static class
+     * @param string|null $elName
+     * @param array $attributes
+     * @param string|null $textContent
+     * @return BaseElement
+     */
+    public static function getStatic(?string $elName=null, array $attributes=[], ?string $textContent=null)
+    {
+        return new static($elName, $attributes, $textContent);
+    }
+
+
+    /**
+     * Adds Element to this element
+     * @param BaseElement $element
+     * @return $this
+     */
+    public function addElement(BaseElement $element): BaseElement
+    {
+        $this->element->addHtml($element->render());
+        return $this;
+    }
+
+
+    /**
+     * Gets instance of Nette HTML element
+     * @return Html
+     */
     public function getElement(): Html
     {
         return $this->element;
