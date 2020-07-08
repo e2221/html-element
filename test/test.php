@@ -14,11 +14,16 @@ echo $test->setElName('a')
     ->render();
 
 
-$a = new \e2221\HtmElement\Href\HrefElement();
+$a = new \e2221\HtmElement\HrefElement();
 $a->setHref('https://www.google.com', ['q' => 'searchtext'])
     ->setTextContent('link')
     ->setTargetBlank()
     ->renderPrint();
 
 
-\e2221\HtmElement\Href\HrefElement::getStatic()->setTextContent('newLink')->renderPrint();
+\e2221\HtmElement\HrefElement::getStatic()
+    ->setTextContent('newLink')
+    ->setHref('https://www.google.com', ['q' => 'filsearch with text'])
+    ->setTargetBlank()
+    ->setConfirmation('Are you confirm?')
+    ->renderPrint();

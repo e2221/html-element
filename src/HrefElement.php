@@ -1,9 +1,8 @@
 <?php
 declare(strict_types=1);
 
-namespace e2221\HtmElement\Href;
+namespace e2221\HtmElement;
 
-use e2221\HtmElement\BaseElement;
 use Nette\Utils\Html;
 
 class HrefElement extends BaseElement
@@ -61,5 +60,16 @@ class HrefElement extends BaseElement
         return $this;
     }
 
+    /**
+     * Set confirmation
+     * @param string $text  text of confirmation
+     * @param string $attribute attribute (onclick, onmousedown, ...)
+     * @return $this
+     */
+    public function setConfirmation(string $text, string $attribute='onclick'): HrefElement
+    {
+        $this->attributes[$attribute] = new Confirmation($text);
+        return $this;
+    }
 
 }
