@@ -1,0 +1,16 @@
+{
+    "name": "e2221/html-element",
+    "description": "Base class for HTML elements",
+    "type": "libraly",
+    "require": {
+        "nette/utils": "^3.1"
+    },
+    "config": {
+        "platform": {
+            "php": "7.4"
+        }
+    },
+    "autoload": {
+        "psr-4": { "e2221\\html-element\\": "src" }
+    }
+}
