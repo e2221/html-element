@@ -27,10 +27,11 @@ class BaseElement
     public ?string $title = null;
 
 
-    public function __construct(?string $elName=null, array $attributes=[], ?string $textContent=null)
+    public function __construct(?string $elName=null, ?array $attributes=null, ?string $textContent=null)
     {
-        $this->attributes = $attributes;
-        $this->textContent = $textContent;
+        $this->attributes = $attributes ?? $this->attributes;
+        $this->textContent = $textContent ?? $this->textContent;
+        $this->elName = $elName ?? $this->elName;
         $this->element = Html::el($elName);
     }
 
@@ -40,6 +41,9 @@ class BaseElement
      */
     public function render(): ?Html
     {
+        if(is_null($this->element->getName()))
+            $this->element->setName($this->elName);
+
         //set attribute class
         $class = $this->getElementClass();
         if(!is_null($class) && !empty($class))
