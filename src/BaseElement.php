@@ -41,8 +41,7 @@ class BaseElement
      */
     public function render(): ?Html
     {
-        if(is_null($this->element->getName()))
-            $this->element->setName($this->elName);
+        $this->element->setName($this->elName);
 
         //set attribute class
         $class = $this->getElementClass();
@@ -86,6 +85,15 @@ class BaseElement
         return new static($elName, $attributes, $textContent);
     }
 
+    /** Add Html
+     * @param string|Html $html
+     * @return BaseElement
+     */
+    public function addHtml($html): BaseElement
+    {
+        $this->element->addHtml($html);
+        return $this;
+    }
 
     /**
      * Adds Element to this element
