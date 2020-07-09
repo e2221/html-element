@@ -11,6 +11,6 @@
         }
     },
     "autoload": {
-        "psr-4": { "e2221\\html-element\\": "src" }
+        "classmap": ["src/"]
     }
 }
