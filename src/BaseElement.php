@@ -41,7 +41,8 @@ class BaseElement
      */
     public function render(): ?Html
     {
-        $this->element->setName($this->elName);
+        if(!is_null($this->elName))
+            $this->element->setName($this->elName);
 
         //set attribute class
         $class = $this->getElementClass();
