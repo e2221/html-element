@@ -15,10 +15,9 @@ class HrefElement extends BaseElement
     /** @var bool set target of link as _blank */
     protected bool $targetBlank = false;
 
-    public function __construct(?string $elName = null, array $attributes = [], ?string $textContent = null)
+    public function __construct(?string $elName = null, ?array $attributes = null, ?string $textContent = null)
     {
         parent::__construct($this->elName, $attributes, $textContent);
-        return $this;
     }
 
     public function render(): ?Html

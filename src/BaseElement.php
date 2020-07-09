@@ -32,7 +32,7 @@ class BaseElement
         $this->attributes = $attributes ?? $this->attributes;
         $this->textContent = $textContent ?? $this->textContent;
         $this->elName = $elName ?? $this->elName;
-        $this->element = Html::el($elName);
+        $this->element = Html::el($this->elName);
     }
 
     /**
