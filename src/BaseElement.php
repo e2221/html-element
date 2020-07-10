@@ -24,7 +24,11 @@ class BaseElement
     /** @var string|null Class of element */
     public ?string $class = null;
 
+    /** @var string|null Title attribute */
     public ?string $title = null;
+
+    /** @var bool If element is hidden - renderer will render null */
+    public bool $hideElement = false;
 
 
     public function __construct(?string $elName=null, ?array $attributes=null, ?string $textContent=null)
@@ -41,6 +45,9 @@ class BaseElement
      */
     public function render(): ?Html
     {
+        if($this->hideElement === true)
+            return null;
+
         if(!is_null($this->elName))
             $this->element->setName($this->elName);
 
@@ -75,7 +82,7 @@ class BaseElement
         echo $this->render();
     }
 
-    /** Get static class
+    /** Get this as static class
      * @param string|null $elName
      * @param array $attributes
      * @param string|null $textContent
@@ -86,7 +93,7 @@ class BaseElement
         return new static($elName, $attributes, $textContent);
     }
 
-    /** Add Html
+    /** Add Html to the element
      * @param string|Html $html
      * @return BaseElement
      */
@@ -118,7 +125,7 @@ class BaseElement
     }
 
     /**
-     * Gets element class
+     * Gets element class (connect $this->class with $this->attributes['class']
      * @return string|null
      */
     public function getElementClass(): ?string
@@ -128,11 +135,12 @@ class BaseElement
         {
             $class .= ' ' . $this->attributes['class'];
         }
-        return $class;
+        return (is_null($class) ? $class : ltrim($class));
     }
 
 
     /**
+     * Directly set Html element
      * @param Html|null $element
      * @return BaseElement
      */
@@ -143,6 +151,7 @@ class BaseElement
     }
 
     /**
+     * Sets element name (<a>, <div>, <input>, ...)
      * @param string|null $elName
      * @return BaseElement
      */
@@ -153,6 +162,7 @@ class BaseElement
     }
 
     /**
+     * Sets attributes (onclick="function(){}")
      * @param array $attributes
      * @return BaseElement
      */
@@ -163,6 +173,7 @@ class BaseElement
     }
 
     /**
+     * Sets text content
      * @param string|null $textContent
      * @return BaseElement
      */
@@ -173,6 +184,7 @@ class BaseElement
     }
 
     /**
+     * Sets class to the element
      * @param string|null $class
      * @return BaseElement
      */
@@ -183,6 +195,7 @@ class BaseElement
     }
 
     /**
+     * Sets title attribute of element
      * @param string|null $title
      * @return BaseElement
      */
@@ -193,12 +206,24 @@ class BaseElement
     }
 
     /**
+     * Sets data attributes (data-ajax=false)
      * @param array $dataAttributes
      * @return BaseElement
      */
     public function setDataAttributes(array $dataAttributes): BaseElement
     {
         $this->dataAttributes = $dataAttributes;
+        return $this;
+    }
+
+    /**
+     * Set element as hidden
+     * @param bool $hidden
+     * @return $this
+     */
+    public function setHidden(bool $hidden=true): BaseElement
+    {
+        $this->hideElement = $hidden;
         return $this;
     }
 
