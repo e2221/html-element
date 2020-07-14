@@ -30,6 +30,9 @@ class BaseElement
     /** @var bool If element is hidden - renderer will render null */
     public bool $hideElement = false;
 
+    /** @var null|Html|string */
+    protected $render=null;
+
 
     public function __construct(?string $elName=null, ?array $attributes=null, ?string $textContent=null)
     {
@@ -71,7 +74,35 @@ class BaseElement
         if(!is_null($this->textContent))
             $this->element->setText($this->textContent);
 
-        return $this->element;
+        return $this->render = $this->element;
+    }
+
+    /**
+     * Render start tag
+     * @return string|null
+     */
+    public function renderStartTag(): ?string
+    {
+        $render = ($a ?? $this->render());
+        if($render instanceof Html)
+        {
+            return $render->startTag();
+        }
+        return null;
+    }
+
+    /**
+     * Render end tag
+     * @return string|null
+     */
+    public function renderEndTag(): ?string
+    {
+        $render = ($a ?? $this->render());
+        if($render instanceof Html)
+        {
+            return $render->endTag();
+        }
+        return null;
     }
 
     /**
@@ -80,6 +111,22 @@ class BaseElement
     public function renderPrint(): void
     {
         echo $this->render();
+    }
+
+    /**
+     * Render and echo Start tag
+     */
+    public function renderPrintStartTag(): void
+    {
+        echo $this->renderStartTag();
+    }
+
+    /**
+     * Render and echo End tag
+     */
+    public function renderPrintEndTag(): void
+    {
+        echo $this->renderEndTag();
     }
 
     /** Get this as static class
