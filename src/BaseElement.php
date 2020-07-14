@@ -83,7 +83,7 @@ class BaseElement
      */
     public function renderStartTag(): ?string
     {
-        $render = ($a ?? $this->render());
+        $render = ($this->render ?? $this->render());
         if($render instanceof Html)
         {
             return $render->startTag();
@@ -97,7 +97,7 @@ class BaseElement
      */
     public function renderEndTag(): ?string
     {
-        $render = ($a ?? $this->render());
+        $render = ($this->render ?? $this->render());
         if($render instanceof Html)
         {
             return $render->endTag();
