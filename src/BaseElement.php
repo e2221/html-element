@@ -21,8 +21,8 @@ class BaseElement
     /** @var string|null Plain-text content of element */
     public ?string $textContent = null;
 
-    /** @var string|null Class of element */
-    public ?string $class = null;
+    /** @var string Class of element */
+    public string $class = '';
 
     /** @var string|null Title attribute */
     public ?string $title = null;
@@ -209,13 +209,37 @@ class BaseElement
     }
 
     /**
-     * Sets attributes (onclick="function(){}")
+     * Sets attributes array (replace $this->attributes)
      * @param array $attributes
      * @return BaseElement
      */
     public function setAttributes(array $attributes): BaseElement
     {
         $this->attributes = $attributes;
+        return $this;
+    }
+
+    /**
+     * Sets one attribute
+     * @param string $attribute
+     * @param string $value
+     * @return $this
+     */
+    public function setAttribute(string $attribute, string $value): BaseElement
+    {
+        $this->attributes[$attribute] = $value;
+        return $this;
+    }
+
+    /**
+     * Add attributes (current values will be overwritten)
+     * @param array $attributes
+     * @return $this
+     */
+    public function addAttributes(array $attributes): BaseElement
+    {
+        foreach($attributes as $key => $value)
+            $this->attributes[$key] = $value;
         return $this;
     }
 
@@ -235,9 +259,20 @@ class BaseElement
      * @param string|null $class
      * @return BaseElement
      */
-    public function setClass(?string $class): BaseElement
+    public function setClass(string $class): BaseElement
     {
         $this->class = $class;
+        return $this;
+    }
+
+    /**
+     * Add class (current class will not be overwritten)
+     * @param string $class
+     * @return $this
+     */
+    public function addClass(string $class): BaseElement
+    {
+        $this->class .= $this->class . (strlen($this->class) > 0 ? ' ' : '') . $class;
         return $this;
     }
 
@@ -264,7 +299,31 @@ class BaseElement
     }
 
     /**
-     * Set element as hidden
+     * Sets one data-attribute
+     * @param string $attribute
+     * @param string $value
+     * @return $this
+     */
+    public function setDataAttribute(string $attribute, string $value): BaseElement
+    {
+        $this->dataAttributes[$attribute] = $value;
+        return $this;
+    }
+
+    /**
+     * Add data attributes ($this->dataAttributes will not be overwritten)
+     * @param array $dataAttributes
+     * @return $this
+     */
+    public function addDataAttributes(array $dataAttributes): BaseElement
+    {
+        foreach($dataAttributes as $key => $value)
+            $this->dataAttributes[$key] = $value;
+        return $this;
+    }
+
+    /**
+     * Set element as hidden (render will return null)
      * @param bool $hidden
      * @return $this
      */

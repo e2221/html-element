@@ -1,7 +1,7 @@
 # html-element
 Base class for setting and rendering HTML elements
 
-Class BaseElement works with Nette\Utils\Html.<br>
+Class BaseElement is based on Nette\Utils\Html.<br>
 You can simply set attributes and render Html elements.<br><br>
 
 There is no documentation yet, but you can see examples
