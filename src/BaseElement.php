@@ -332,5 +332,4 @@ class BaseElement
         $this->hideElement = $hidden;
         return $this;
     }
-
 }
