@@ -256,7 +256,7 @@ class BaseElement
 
     /**
      * Sets class to the element
-     * @param string|null $class
+     * @param string $class
      * @return BaseElement
      */
     public function setClass(string $class): BaseElement
