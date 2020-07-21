@@ -42,6 +42,12 @@ class BaseElement
         $this->element = Html::el($this->elName);
     }
 
+    public function __toString()
+    {
+        return (string)$this->render();
+    }
+
+
     /**
      * Render html element
      * @return Html|null
@@ -139,6 +145,7 @@ class BaseElement
     {
         return new static($elName, $attributes, $textContent);
     }
+
 
     /** Add Html to the element
      * @param string|Html $html
