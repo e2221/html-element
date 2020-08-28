@@ -97,6 +97,11 @@ class BaseElement
         return null;
     }
 
+    public function startTag(): ?string
+    {
+        return $this->renderStartTag();
+    }
+
     /**
      * Render end tag
      * @return string|null
@@ -109,6 +114,11 @@ class BaseElement
             return $render->endTag();
         }
         return null;
+    }
+
+    public function endTag(): ?string
+    {
+        return $this->renderEndTag();
     }
 
     /**
