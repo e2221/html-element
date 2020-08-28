@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . '../../../../autoload.php';
 foreach (glob(__DIR__ . "/../src/*.php") as $filename)
 {
     include $filename;
@@ -8,18 +8,18 @@ foreach (glob(__DIR__ . "/../src/*.php") as $filename)
 
 //hidden element
 \e2221\HtmElement\BaseElement::getStatic('div', ['class'=>'bg-primary'])    //el name = html element name, parameters => array of attributes
-    ->addElement(\e2221\HtmElement\BaseElement::getStatic('p')
-        ->addElement(\e2221\HtmElement\HrefElement::getStatic() // will add html element to the html element
-            ->setTextContent('link')    // will set text content
-            ->setHref('https://google.com')  // will set href link
-            ->setConfirmation('aaa')         // will set javascript confirmation
-            ->setClass('             myLinkClass') // will set class of element
-            ->setHidden()                         // will hide this element
-        )
-        ->setDataAttributes(['ajax' => 'false'])   // will set data-ajax="false" to attribute
-        ->setTitle('my title')              // will set attribute title
-        ->setAttributes(['title' => 'my title', 'anyattribute' => 'anyvalue']) // will set also title or any html attribute
+->addElement(\e2221\HtmElement\BaseElement::getStatic('p')
+    ->addElement(\e2221\HtmElement\HrefElement::getStatic() // will add html element to the html element
+    ->setTextContent('link')    // will set text content
+    ->setHref('https://google.com')  // will set href link
+    ->setConfirmation('aaa')         // will set javascript confirmation
+    ->setClass('             myLinkClass') // will set class of element
+    //->setHidden()                         // will hide this element
     )
+    ->setDataAttributes(['ajax' => 'false'])   // will set data-ajax="false" to attribute
+    ->setTitle('my title')              // will set attribute title
+    ->setAttributes(['title' => 'my title', 'anyattribute' => 'anyvalue']) // will set also title or any html attribute
+)
     ->renderPrint();
 
 echo '<br>';
@@ -52,7 +52,7 @@ echo '<br>';
 
 //render + echo
 $a->renderPrintStartTag();
-    echo 'my another content';
+echo 'my another content';
 $a->renderPrintEndTag();
 
 
