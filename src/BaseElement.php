@@ -289,7 +289,7 @@ class BaseElement
      */
     public function addClass(string $class): BaseElement
     {
-        $this->class .= $this->class . (strlen($this->class) > 0 ? ' ' : '') . $class;
+        $this->class = sprintf('%s%s%s', $this->class, empty($this->class) ? '' : ' ', $class);
         return $this;
     }
 
