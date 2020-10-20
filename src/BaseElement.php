@@ -24,6 +24,18 @@ class BaseElement
     /** @var string Class of element */
     public string $class = '';
 
+    /** @var array classes that will be connected to final class attribute */
+    public array $addClass = [];
+
+    /** @var string Not-overridable class  */
+    public string $defaultClass = '';
+
+    /** @var string|null span is showed only if this variable is not null */
+    protected ?string $spanClass=null;
+
+    /** @var string|null i is showed only if this variable is not null */
+    protected ?string $iconClass=null;
+
     /** @var string|null Title attribute */
     public ?string $title = null;
 
@@ -62,7 +74,7 @@ class BaseElement
 
         //set attribute class
         $class = $this->getElementClass();
-        if(!is_null($class) && !empty($class))
+        if(strlen($class) > 0)
             $this->attributes['class'] = $class;
 
         if(!is_null($this->title))
@@ -80,6 +92,15 @@ class BaseElement
         if(!is_null($this->textContent))
             $this->element->setText($this->textContent);
 
+        if($this->spanClass !== null) {
+            $span = Html::el('span');
+            $span->setAttribute('class', $this->spanClass);
+            $this->addHtml($span);
+        }else if ($this->iconClass !== null) {
+            $icon = Html::el('i');
+            $icon->setAttribute('class', $this->iconClass);
+            $this->addHtml($icon);
+        }
         return $this->render = $this->element;
     }
 
@@ -194,14 +215,60 @@ class BaseElement
      */
     public function getElementClass(): ?string
     {
-        $class = $this->class;
-        if(is_array($this->attributes) && array_key_exists('class', $this->attributes))
-        {
-            $class .= ' ' . $this->attributes['class'];
-        }
-        return (is_null($class) ? $class : ltrim($class));
+        return rtrim(ltrim(sprintf('%s%s%s%s%s%s%s',
+            $this->defaultClass,
+            empty($this->defaultClass) ? '' : ' ',
+            $this->class,
+            empty($this->class) ? '' : ' ',
+            implode(' ', $this->addClass),
+            count($this->addClass) ? '' : ' ',
+            array_key_exists('class', $this->attributes) ? implode(' ', $this->attributes['class']) : ''
+        )));
     }
 
+    /**
+     * Set add class [classes will be added to class string]
+     * @param array $addClass
+     * @return BaseElement
+     */
+    public function setAddClass(array $addClass): self
+    {
+        $this->addClass = $addClass;
+        return $this;
+    }
+
+    /**
+     * Set default class [class that is not able to overwrite]
+     * @param string $defaultClass
+     * @return BaseElement
+     */
+    public function setDefaultClass(string $defaultClass): self
+    {
+        $this->defaultClass = $defaultClass;
+        return $this;
+    }
+
+    /**
+     * Set icon class
+     * @param string|null $iconClass
+     * @return BaseElement
+     */
+    public function setIconClass(?string $iconClass): self
+    {
+        $this->iconClass = $iconClass;
+        return $this;
+    }
+
+    /**
+     * Set span class
+     * @param string|null $spanClass
+     * @return BaseElement
+     */
+    public function setSpanClass(?string $spanClass): self
+    {
+        $this->spanClass = $spanClass;
+        return $this;
+    }
 
     /**
      * Directly set Html element
