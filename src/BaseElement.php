@@ -216,13 +216,13 @@ class BaseElement
     public function getElementClass(): ?string
     {
         return rtrim(ltrim(sprintf('%s%s%s%s%s%s%s',
+            array_key_exists('class', $this->attributes) ? $this->attributes['class'] : '',
+            array_key_exists('class', $this->attributes) && $this->attributes['class'] != '' ? ' ' : '',
             $this->defaultClass,
             empty($this->defaultClass) ? '' : ' ',
             $this->class,
             empty($this->class) ? '' : ' ',
-            implode(' ', $this->addClass),
-            count($this->addClass) ? '' : ' ',
-            array_key_exists('class', $this->attributes) ? $this->attributes['class'] : ''
+            implode(' ', $this->addClass)
         )));
     }
 
