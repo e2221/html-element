@@ -222,7 +222,7 @@ class BaseElement
             empty($this->class) ? '' : ' ',
             implode(' ', $this->addClass),
             count($this->addClass) ? '' : ' ',
-            array_key_exists('class', $this->attributes) ? implode(' ', $this->attributes['class']) : ''
+            array_key_exists('class', $this->attributes) ? $this->attributes['class'] : ''
         )));
     }
 
