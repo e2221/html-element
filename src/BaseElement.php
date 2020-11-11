@@ -59,6 +59,12 @@ class BaseElement
         return (string)$this->render();
     }
 
+    /**
+     * Before render
+     */
+    public function beforeRender(): void
+    {
+    }
 
     /**
      * Render html element
@@ -66,6 +72,8 @@ class BaseElement
      */
     public function render(): ?Html
     {
+        $this->beforeRender();
+
         if($this->hideElement === true)
             return null;
 
