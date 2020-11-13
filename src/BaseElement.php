@@ -424,4 +424,13 @@ class BaseElement
         $this->hideElement = $hidden;
         return $this;
     }
+
+    /**
+     * Is element hidden?
+     * @return bool
+     */
+    public function isHidden(): bool
+    {
+        return $this->hideElement;
+    }
 }
