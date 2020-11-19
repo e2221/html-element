@@ -218,6 +218,21 @@ class BaseElement
     }
 
     /**
+     * Get attributes as text
+     * @return string|null
+     */
+    public function getAttributes(): ?string
+    {
+        $render = ($this->render ?? $this->render());
+        if($render instanceof Html)
+        {
+            $attributes = $render->attributes();
+            return empty($attributes) ? null : $attributes;
+        }
+        return null;
+    }
+
+    /**
      * Gets element class (connect $this->class with $this->attributes['class']
      * @return string|null
      */
