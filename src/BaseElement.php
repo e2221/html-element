@@ -72,8 +72,8 @@ class BaseElement
      */
     public function renderImmutable(): ?Html
     {
-        $this->element = Html::el();
-        return $this->render();
+        $this->element = Html::el($this->elName);
+        return self::render();
     }
 
     /**
@@ -93,7 +93,7 @@ class BaseElement
         //set attribute class
         $class = $this->getElementClass();
         if(strlen($class) > 0)
-            $this->attributes['class'] = $class;
+            $this->element->class($class);
 
         if(!is_null($this->title))
             $this->attributes['title'] = $this->title;
