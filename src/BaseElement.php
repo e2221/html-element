@@ -51,7 +51,6 @@ class BaseElement
         $this->attributes = $attributes ?? $this->attributes;
         $this->textContent = $textContent ?? $this->textContent;
         $this->elName = $elName ?? $this->elName;
-        $this->element = Html::el($this->elName);
     }
 
     public function __toString()
@@ -76,6 +75,8 @@ class BaseElement
 
         if($this->hideElement === true)
             return null;
+
+        $this->element = Html::el($this->elName);
 
         if(!is_null($this->elName))
             $this->element->setName($this->elName);
@@ -214,7 +215,7 @@ class BaseElement
      * Gets instance of Nette HTML element
      * @return Html
      */
-    public function getElement(): Html
+    public function getElement(): ?Html
     {
         return $this->element;
     }
