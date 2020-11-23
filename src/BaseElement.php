@@ -7,7 +7,7 @@ use Nette\Utils\Html;
 
 class BaseElement
 {
-    public ?Html $element=null;
+    public ?Html $element;
 
     /** @var string|null Element Name (div, a, input) */
     protected ?string $elName = null;
@@ -51,6 +51,7 @@ class BaseElement
         $this->attributes = $attributes ?? $this->attributes;
         $this->textContent = $textContent ?? $this->textContent;
         $this->elName = $elName ?? $this->elName;
+        $this->element = Html::el($this->elName);
     }
 
     public function __toString()
@@ -66,6 +67,16 @@ class BaseElement
     }
 
     /**
+     * Render immutable - clear the html element
+     * @return Html|null
+     */
+    public function renderImmutable(): ?Html
+    {
+        $this->element = Html::el();
+        return $this->render();
+    }
+
+    /**
      * Render html element
      * @return Html|null
      */
@@ -75,8 +86,6 @@ class BaseElement
 
         if($this->hideElement === true)
             return null;
-
-        $this->element = Html::el($this->elName);
 
         if(!is_null($this->elName))
             $this->element->setName($this->elName);
@@ -105,10 +114,12 @@ class BaseElement
             $span = Html::el('span');
             $span->setAttribute('class', $this->spanClass);
             $this->addHtml($span);
+            $this->spanClass = null;
         }else if ($this->iconClass !== null) {
             $icon = Html::el('i');
             $icon->setAttribute('class', $this->iconClass);
             $this->addHtml($icon);
+            $this->iconClass = null;
         }
         return $this->render = $this->element;
     }
@@ -213,7 +224,7 @@ class BaseElement
      * Gets instance of Nette HTML element
      * @return Html
      */
-    public function getElement(): ?Html
+    public function getElement(): Html
     {
         return $this->element;
     }
