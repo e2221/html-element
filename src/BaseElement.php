@@ -104,10 +104,12 @@ class BaseElement
             $span = Html::el('span');
             $span->setAttribute('class', $this->spanClass);
             $this->addHtml($span);
+            $this->spanClass = null;
         }else if ($this->iconClass !== null) {
             $icon = Html::el('i');
             $icon->setAttribute('class', $this->iconClass);
             $this->addHtml($icon);
+            $this->iconClass = null;
         }
         return $this->render = $this->element;
     }
