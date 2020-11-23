@@ -7,7 +7,7 @@ use Nette\Utils\Html;
 
 class BaseElement
 {
-    public ?Html $element;
+    public ?Html $element=null;
 
     /** @var string|null Element Name (div, a, input) */
     protected ?string $elName = null;
@@ -105,12 +105,10 @@ class BaseElement
             $span = Html::el('span');
             $span->setAttribute('class', $this->spanClass);
             $this->addHtml($span);
-            $this->spanClass = null;
         }else if ($this->iconClass !== null) {
             $icon = Html::el('i');
             $icon->setAttribute('class', $this->iconClass);
             $this->addHtml($icon);
-            $this->iconClass = null;
         }
         return $this->render = $this->element;
     }
