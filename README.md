@@ -1,3 +1,6 @@
+# DEPRACED - no support
+use <a href="https://github.com/e2221/utils/tree/main/src/Html">e2221/utils<a/> instead
+
 # html-element
 Base class for setting and rendering HTML elements
 
